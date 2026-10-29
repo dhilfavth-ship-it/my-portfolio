@@ -1,83 +1,81 @@
 import React from 'react';
 import { EXPERIENCES } from '../data/portfolioData';
-import { Briefcase, Calendar, MapPin, CheckCircle2, Award } from 'lucide-react';
+import { Calendar, MapPin, CheckCircle2 } from 'lucide-react';
 
 export const ExperienceTimeline: React.FC = () => {
   return (
-    <section id="experience" className="py-20 md:py-28 relative bg-[#0A0A0C] border-t border-[#1F1B26]">
+    <section id="experience" className="py-24 md:py-32 relative bg-[#111827] border-t border-[#1E2A3A]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="mb-14 text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#181420] border border-[#2B2336] text-xs font-mono text-[#FB7185] uppercase tracking-wider mb-3">
-            <Briefcase className="w-3.5 h-3.5 text-[#E11D48]" />
-            <span>Section 05 · Experience</span>
+        <div className="mb-16">
+          <p className="text-xs font-mono text-[#E8395A] uppercase tracking-[0.2em] mb-3">05 — Experience</p>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <h2 className="text-3xl sm:text-5xl font-black text-[#F0EBF5] tracking-tight leading-tight">
+              Work<br />
+              <span className="text-[#FF6B8A]">History</span>
+            </h2>
+            <p className="text-sm text-[#8B9BB4] max-w-xs leading-relaxed">
+              A track record of full-stack engineering and systems leadership.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Work Experience
-          </h2>
-          <p className="text-sm sm:text-base text-[#9E97A6] mt-2 max-w-xl font-normal">
-            A chronological track record of full-stack leadership, system architecture, and engineering contributions.
-          </p>
         </div>
 
-        {/* Timeline List */}
-        <div className="relative pl-6 sm:pl-8 border-l border-[#282132] space-y-10">
-          {EXPERIENCES.map((exp) => (
+        {/* Timeline */}
+        <div className="relative pl-6 sm:pl-10 border-l border-[#1E2A3A] space-y-10">
+          {EXPERIENCES.map((exp, index) => (
             <div key={exp.id} className="relative group">
-              {/* Timeline Node Indicator */}
+              {/* Timeline Node */}
               <div
-                className={`absolute -left-[31px] sm:-left-[39px] top-6 w-3.5 h-3.5 rounded-full border-2 border-[#E11D48] bg-[#0A0A0C] transition-all duration-200 ${
+                className={`absolute -left-[27px] sm:-left-[35px] top-7 w-3.5 h-3.5 rounded-full border-2 transition-all duration-200 ${
                   exp.isCurrent
-                    ? 'bg-[#E11D48] shadow-[0_0_12px_rgba(225,29,72,0.8)] scale-110'
-                    : 'group-hover:border-[#FB7185] group-hover:scale-110'
+                    ? 'border-[#E8395A] bg-[#E8395A] shadow-[0_0_14px_rgba(232,57,90,0.7)]'
+                    : 'border-[#1E2A3A] bg-[#0B0F19] group-hover:border-[#E8395A] group-hover:scale-125'
                 }`}
               />
 
-              {/* Experience Card */}
-              <div className="rounded-2xl bg-[#121017] border border-[#231E2C] hover:border-[#E11D48]/50 p-6 sm:p-7 transition-all duration-200 shadow-sm space-y-4">
+              {/* Card */}
+              <div className="rounded-2xl bg-[#0B0F19] border border-[#1E2A3A] hover:border-[#E8395A]/30 p-6 sm:p-8 transition-all duration-200 space-y-5">
                 
-                {/* Header Information */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#201B28]">
+                {/* Header */}
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 pb-4 border-b border-[#1E2A3A]">
                   <div>
-                    <div className="flex flex-wrap items-center gap-2 mb-1">
-                      <span className="text-xs font-mono text-[#FB7185] font-semibold flex items-center gap-1.5">
+                    <div className="flex flex-wrap items-center gap-2 mb-2">
+                      <span className="text-xs font-mono text-[#FF6B8A] flex items-center gap-1.5">
                         <Calendar className="w-3.5 h-3.5" />
                         {exp.period}
                       </span>
                       {exp.badge && (
-                        <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-[#E11D48]/20 text-[#FB7185] border border-[#E11D48]/30">
+                        <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-[#E8395A]/15 text-[#FF6B8A] border border-[#E8395A]/25">
                           {exp.badge}
                         </span>
                       )}
-                      <span className="text-xs font-mono text-[#8E8798] flex items-center gap-1">
-                        <MapPin className="w-3 h-3 text-[#E11D48]" />
+                      <span className="text-xs font-mono text-[#4A5568] flex items-center gap-1">
+                        <MapPin className="w-3 h-3 text-[#E8395A]" />
                         {exp.location}
                       </span>
                     </div>
-
-                    <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#FB7185] transition-colors">
+                    <h3 className="text-xl sm:text-2xl font-black text-[#F0EBF5] group-hover:text-[#FF6B8A] transition-colors tracking-tight">
                       {exp.role}
                     </h3>
-                    <div className="text-sm font-semibold text-[#E11D48] mt-0.5 font-mono">
-                      {exp.company}
-                    </div>
+                    <p className="text-sm font-semibold text-[#E8395A] mt-0.5 font-mono">{exp.company}</p>
                   </div>
+                  <span className="text-3xl font-black text-[#1E2A3A] font-mono shrink-0 hidden sm:block">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
                 </div>
 
-                {/* Role Summary */}
-                <p className="text-sm text-[#C5BFCB] leading-relaxed">
-                  {exp.summary}
-                </p>
+                {/* Summary */}
+                <p className="text-sm text-[#8B9BB4] leading-relaxed">{exp.summary}</p>
 
-                {/* Key Responsibilities & Achievements */}
-                <div className="space-y-2 pt-1">
-                  <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-[#8E8798]">
-                    Key Responsibilities & Achievements:
+                {/* Key Points */}
+                <div className="space-y-2">
+                  <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-[#4A5568]">
+                    Key Achievements
                   </h4>
                   <ul className="space-y-2">
-                    {exp.metrics.concat(exp.achievements).slice(0, 4).map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#D4CEDB] leading-relaxed">
+                    {exp.metrics.concat(exp.achievements).slice(0, 4).map((item, i) => (
+                      <li key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#8B9BB4] leading-relaxed">
                         <CheckCircle2 className="w-4 h-4 text-[#10B981] shrink-0 mt-0.5" />
                         <span>{item}</span>
                       </li>
@@ -85,24 +83,22 @@ export const ExperienceTimeline: React.FC = () => {
                   </ul>
                 </div>
 
-                {/* Tech Stack Pills */}
-                <div className="pt-3 border-t border-[#201B28] flex flex-wrap gap-1.5 items-center">
-                  <span className="text-[11px] font-mono text-[#8E8798] mr-1">Technologies:</span>
+                {/* Tech Stack */}
+                <div className="pt-4 border-t border-[#1E2A3A] flex flex-wrap gap-1.5 items-center">
+                  <span className="text-[11px] font-mono text-[#4A5568] mr-1">Stack:</span>
                   {exp.techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#1A1622] text-[#D4CEDB] border border-[#2B2336]"
+                      className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#111827] text-[#8B9BB4] border border-[#1E2A3A]"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
-
               </div>
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

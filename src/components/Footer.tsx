@@ -22,32 +22,32 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   ];
 
   return (
-    <footer className="border-t border-[#1F1B26] bg-[#0A0A0C] text-[#8E8798] text-xs py-10 relative">
+    <footer className="border-t border-[#1E2A3A] bg-[#0B0F19] text-[#8B9BB4] text-xs py-10 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-[#1C1824]">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-[#1E2A3A]">
           {/* Brand Info */}
           <div className="flex items-center gap-3">
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#E11D48] to-[#991B1B] flex items-center justify-center font-bold text-xs text-white">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#E8395A] to-[#A51535] flex items-center justify-center font-black text-xs text-white shadow-[0_0_12px_rgba(232,57,90,0.4)]">
               FD
             </div>
             <div>
-              <div className="text-white font-bold text-sm">
+              <div className="text-[#F0EBF5] font-bold text-sm">
                 {PORTFOLIO_INFO.name}
               </div>
-              <div className="text-[11px] text-[#8E8798]">
+              <div className="text-[11px] text-[#4A5568]">
                 {PORTFOLIO_INFO.role} · Portfolio
               </div>
             </div>
           </div>
 
           {/* Quick Nav Links */}
-          <div className="flex flex-wrap items-center justify-center gap-4 text-xs">
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-mono">
             {navLinks.map((link) => (
               <button
                 key={link.id}
                 onClick={() => onNavigate(link.id)}
-                className="hover:text-white transition-colors cursor-pointer"
+                className="text-[#4A5568] hover:text-[#F0EBF5] transition-colors cursor-pointer"
               >
                 {link.label}
               </button>
@@ -60,7 +60,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               href={PORTFOLIO_INFO.socials.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg bg-[#14111A] border border-[#231E2C] hover:text-white text-[#9E97A6] transition-colors"
+              className="p-2 rounded-lg bg-[#111827] border border-[#1E2A3A] hover:border-[#E8395A]/40 hover:text-[#FF6B8A] text-[#8B9BB4] transition-all"
               title="GitHub"
             >
               <Github className="w-4 h-4" />
@@ -70,7 +70,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               href={PORTFOLIO_INFO.socials.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg bg-[#14111A] border border-[#231E2C] hover:text-white text-[#9E97A6] transition-colors"
+              className="p-2 rounded-lg bg-[#111827] border border-[#1E2A3A] hover:border-[#38BDF8]/40 hover:text-[#38BDF8] text-[#8B9BB4] transition-all"
               title="LinkedIn"
             >
               <Linkedin className="w-4 h-4" />
@@ -78,7 +78,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
             <a
               href={`mailto:${PORTFOLIO_INFO.socials.email}`}
-              className="p-2 rounded-lg bg-[#14111A] border border-[#231E2C] hover:text-white text-[#9E97A6] transition-colors"
+              className="p-2 rounded-lg bg-[#111827] border border-[#1E2A3A] hover:border-[#10B981]/40 hover:text-[#10B981] text-[#8B9BB4] transition-all"
               title="Email"
             >
               <Mail className="w-4 h-4" />
@@ -86,7 +86,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
             <button
               onClick={scrollToTop}
-              className="flex items-center gap-1 px-2.5 py-2 rounded-lg bg-[#14111A] border border-[#231E2C] hover:border-[#E11D48]/50 text-white transition-colors cursor-pointer ml-2"
+              className="flex items-center gap-1 px-2.5 py-2 rounded-lg bg-[#111827] border border-[#1E2A3A] hover:border-[#E8395A]/50 hover:text-[#FF6B8A] text-[#8B9BB4] transition-all cursor-pointer ml-2"
               title="Back to Top"
             >
               <ArrowUp className="w-3.5 h-3.5" />
@@ -95,8 +95,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         </div>
 
         {/* Minimal Copyright Notice */}
-        <div className="text-center text-[11px] text-[#6E6778]">
-          © {new Date().getFullYear()} {PORTFOLIO_INFO.name}. All rights reserved. Built with React, TypeScript, and modern CSS.
+        <div className="text-center text-[11px] text-[#4A5568] font-mono">
+          © {new Date().getFullYear()} {PORTFOLIO_INFO.name}. All rights reserved. Built with React, TypeScript, and Tailwind CSS.
         </div>
 
       </div>

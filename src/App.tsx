@@ -1,112 +1,18 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
+import { useState } from 'react';
+import { PORTFOLIO_INFO, PROJECTS, SKILL_CATEGORIES, EXPERIENCES, EDUCATION_ITEMS, CERTIFICATIONS } from './data/portfolioData';
+import { ArrowDown, ArrowUpRight, Github, Linkedin, Mail, Menu, X } from 'lucide-react';
 
-import React, { useState, useEffect } from 'react';
-import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { AboutSection } from './components/AboutSection';
-import { TechStackRadar } from './components/TechStackRadar';
-import { ProjectsSection } from './components/ProjectsSection';
-import { ExperienceTimeline } from './components/ExperienceTimeline';
-import { EducationSection } from './components/EducationSection';
-import { ContactSection } from './components/ContactSection';
-import { Footer } from './components/Footer';
-import { ArrowUp } from 'lucide-react';
-
+const nav = [['about','About'],['skills','Skills'],['projects','Projects'],['experience','Experience'],['contact','Contact']];
+const isPlaceholder = (url: string) => /\/\/$/.test(url);
 export default function App() {
-  const [activeSection, setActiveSection] = useState<string>('home');
-  const [showScrollTop, setShowScrollTop] = useState<boolean>(false);
-
-  // Intersection observer & scroll listener to highlight current navigation item
-  useEffect(() => {
-    const sectionIds = ['home', 'about', 'skills', 'projects', 'experience', 'education', 'contact'];
-    
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 400);
-
-      const scrollPos = window.scrollY + 200;
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            setActiveSection(id);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const handleNavigate = (sectionId: string) => {
-    setActiveSection(sectionId);
-    if (sectionId === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-    const targetEl = document.getElementById(sectionId);
-    if (targetEl) {
-      targetEl.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-[#0A0A0C] text-[#EDE8F0] selection:bg-[#E11D48]/30 selection:text-[#FFFFFF] relative font-sans antialiased">
-      {/* Fixed Navigation Header */}
-      <Navbar
-        activeSection={activeSection}
-        onNavigate={handleNavigate}
-      />
-
-      {/* Exactly 7 Main Sections */}
-      <main>
-        {/* Section 1: Hero Section */}
-        <div id="home">
-          <Hero
-            onExploreProjects={() => handleNavigate('projects')}
-            onContact={() => handleNavigate('contact')}
-          />
-        </div>
-
-        {/* Section 2: About Me */}
-        <AboutSection />
-
-        {/* Section 3: Technical Skills */}
-        <TechStackRadar />
-
-        {/* Section 4: Featured Projects */}
-        <ProjectsSection />
-
-        {/* Section 5: Experience */}
-        <ExperienceTimeline />
-
-        {/* Section 6: Education & Certifications */}
-        <EducationSection />
-
-        {/* Section 7: Contact Section */}
-        <ContactSection />
-      </main>
-
-      {/* Minimal Footer */}
-      <Footer onNavigate={handleNavigate} />
-
-      {/* Subtle Floating Scroll-to-Top Button */}
-      {showScrollTop && (
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-6 right-6 z-40 p-2.5 rounded-xl bg-[#14111A]/90 hover:bg-[#1E1926] border border-[#2B2336] hover:border-[#E11D48]/60 text-white shadow-lg transition-all duration-200 cursor-pointer active:scale-95"
-          title="Scroll to top"
-          aria-label="Scroll to top"
-        >
-          <ArrowUp className="w-4 h-4 text-[#FB7185]" />
-        </button>
-      )}
-    </div>
-  );
+ const [menuOpen,setMenuOpen]=useState(false);
+ const jump=(id:string)=>{document.getElementById(id)?.scrollIntoView({behavior:'smooth'});setMenuOpen(false)};
+ return <div className="site-shell"><header className="topbar"><a className="wordmark" href="#home">FD<span>.</span></a><button className="menu-toggle" onClick={()=>setMenuOpen(!menuOpen)} aria-label="Toggle navigation">{menuOpen?<X/>:<Menu/>}</button><nav className={menuOpen?'nav-links open':'nav-links'}>{nav.map(([id,label])=><a key={id} href={'#'+id} onClick={()=>setMenuOpen(false)}>{label}</a>)}</nav><a className="nav-cta" href="#contact">Let’s talk <ArrowUpRight size={15}/></a></header><main>
+ <section className="hero" id="home"><div className="hero-copy"><p className="eyebrow"><span className="status-dot"/>Portfolio · {new Date().getFullYear()}</p><p className="hello">Hello, I’m</p><h1>{PORTFOLIO_INFO.name}<span className="accent">.</span></h1><h2>{PORTFOLIO_INFO.role}</h2><p className="intro">{PORTFOLIO_INFO.shortBio}</p><div className="hero-actions"><button className="button button-primary" onClick={()=>jump('projects')}>Explore my work <ArrowDown size={16}/></button><a className="button button-quiet" href={`mailto:${PORTFOLIO_INFO.socials.email}`}>Get in touch <ArrowUpRight size={16}/></a></div><div className="social-links">{!isPlaceholder(PORTFOLIO_INFO.socials.github)&&<a href={PORTFOLIO_INFO.socials.github} target="_blank" rel="noreferrer"><Github size={17}/>GitHub</a>}{!isPlaceholder(PORTFOLIO_INFO.socials.linkedin)&&<a href={PORTFOLIO_INFO.socials.linkedin} target="_blank" rel="noreferrer"><Linkedin size={17}/>LinkedIn</a>}<a href={`mailto:${PORTFOLIO_INFO.socials.email}`}><Mail size={17}/>{PORTFOLIO_INFO.socials.email}</a></div></div><div className="hero-art" aria-hidden="true"><span className="art-mark">FD</span><span className="art-caption">FULL STACK<br/>DEVELOPER</span><i className="shape shape-one"/><i className="shape shape-two"/></div><a className="scroll-cue" href="#about">Scroll to explore <ArrowDown size={14}/></a></section>
+ <section className="section about-section" id="about"><div className="section-head"><p className="eyebrow">01 / About</p><h2>Thoughtful by design.<br/><span className="muted">Practical by nature.</span></h2></div><div className="about-copy"><p>{PORTFOLIO_INFO.about.intro}</p><p>{PORTFOLIO_INFO.about.interests}</p></div></section>
+ <section className="section" id="skills"><div className="section-head"><p className="eyebrow">02 / Toolkit</p><h2>Tools I work with<span className="accent">.</span></h2><p className="section-note">A selection from my development toolkit.</p></div><div className="skill-grid">{SKILL_CATEGORIES.map(c=><article className="skill-card" key={c.title}><h3>{c.title}</h3><p>{c.description}</p><div className="tag-list">{c.skills.map(s=><span className="tag" key={s.name}>{s.name}</span>)}</div></article>)}</div></section>
+ <section className="section" id="projects"><div className="section-head"><p className="eyebrow">03 / Selected work</p><h2>Projects<span className="accent">.</span></h2><p className="section-note">A selection of projects from my portfolio.</p></div><div className="project-grid">{PROJECTS.map((p,i)=><article className="project-card" key={p.id}><div className="project-top"><span className="project-index">0{i+1}</span><span className="project-type">{p.category}</span></div><h3>{p.title}</h3><p className="project-tagline">{p.tagline}</p><p className="project-description">{p.description}</p><div className="tag-list">{p.stack.map(t=><span className="tag" key={t}>{t}</span>)}</div><div className="project-links">{!isPlaceholder(p.githubUrl)&&<a href={p.githubUrl} target="_blank" rel="noreferrer"><Github size={16}/>Source <ArrowUpRight size={14}/></a>}{!isPlaceholder(p.docsUrl)&&p.docsUrl!==p.githubUrl&&<a href={p.docsUrl} target="_blank" rel="noreferrer">Details <ArrowUpRight size={14}/></a>}</div></article>)}</div></section>
+ <section className="section" id="experience"><div className="section-head"><p className="eyebrow">04 / Background</p><h2>Experience & education<span className="accent">.</span></h2></div><div className="experience-list">{EXPERIENCES.map(e=><article className="experience-item" key={e.id}><div className="experience-period">{e.period}</div><div><h3>{e.role}</h3><p className="experience-company">{e.company}</p><p className="experience-summary">{e.summary}</p></div></article>)}</div><div className="credentials">{EDUCATION_ITEMS.map(e=><article className="credential" key={e.institution}><p className="eyebrow">Education · {e.period}</p><h3>{e.degree}</h3><p>{e.institution}</p></article>)}{CERTIFICATIONS.map(c=><article className="credential" key={c.title}><p className="eyebrow">Certification · {c.year}</p><h3>{c.title}</h3><p>{c.issuer}</p></article>)}</div></section>
+ <section className="contact-section" id="contact"><p className="eyebrow">05 / Contact</p><h2>Have a good project<br/>in mind<span className="accent">?</span></h2><p>Let’s make something useful, thoughtful, and built to last.</p><a className="button button-primary" href={`mailto:${PORTFOLIO_INFO.socials.email}`}>Say hello <ArrowUpRight size={16}/></a><div className="contact-email">{PORTFOLIO_INFO.socials.email}</div></section>
+ </main><footer className="footer"><a className="wordmark" href="#home">FD<span>.</span></a><span>© {new Date().getFullYear()} {PORTFOLIO_INFO.name}</span><a href="#home">Back to top ↑</a></footer></div>;
 }

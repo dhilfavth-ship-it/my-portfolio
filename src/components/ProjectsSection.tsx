@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Project, PROJECTS } from '../data/portfolioData';
-import { Github, ExternalLink, Code2, FolderGit2, CheckCircle2, Terminal } from 'lucide-react';
+import { PROJECTS } from '../data/portfolioData';
+import { Github, ExternalLink, CheckCircle2, Terminal } from 'lucide-react';
 
 export const ProjectsSection: React.FC = () => {
   const [selectedFilter, setSelectedFilter] = useState<string>('All');
@@ -12,22 +12,22 @@ export const ProjectsSection: React.FC = () => {
     : PROJECTS.filter((p) => p.category === selectedFilter);
 
   return (
-    <section id="projects" className="py-20 md:py-28 relative bg-[#0D0B10] border-t border-[#1F1B26]">
+    <section id="projects" className="py-24 md:py-32 relative bg-[#0B0F19] border-t border-[#1E2A3A]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <div className="text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#181420] border border-[#2B2336] text-xs font-mono text-[#FB7185] uppercase tracking-wider mb-3">
-              <FolderGit2 className="w-3.5 h-3.5 text-[#E11D48]" />
-              <span>Section 04 · Featured Projects</span>
+        <div className="mb-16 flex flex-col gap-6">
+          <div>
+            <p className="text-xs font-mono text-[#E8395A] uppercase tracking-[0.2em] mb-3">04 — Featured Projects</p>
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+              <h2 className="text-3xl sm:text-5xl font-black text-[#F0EBF5] tracking-tight leading-tight">
+                Selected<br />
+                <span className="text-[#FF6B8A]">Work</span>
+              </h2>
+              <p className="text-sm text-[#8B9BB4] max-w-xs leading-relaxed">
+                High-impact full-stack and systems engineering projects — clean code, real problems.
+              </p>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Featured Projects
-            </h2>
-            <p className="text-sm sm:text-base text-[#9E97A6] mt-2 max-w-xl font-normal">
-              A curated selection of high-impact full-stack and systems engineering projects showcasing clean code and practical problem-solving.
-            </p>
           </div>
 
           {/* Filter Pills */}
@@ -36,10 +36,10 @@ export const ProjectsSection: React.FC = () => {
               <button
                 key={filter}
                 onClick={() => setSelectedFilter(filter)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all duration-150 cursor-pointer ${
+                className={`px-4 py-2 rounded-xl text-xs font-mono font-medium transition-all duration-150 cursor-pointer ${
                   selectedFilter === filter
-                    ? 'bg-[#E11D48] text-white font-semibold shadow-sm'
-                    : 'bg-[#15121B] text-[#9E97A6] hover:text-white border border-[#251F2E]'
+                    ? 'bg-[#E8395A] text-white shadow-[0_2px_12px_rgba(232,57,90,0.35)]'
+                    : 'bg-[#111827] text-[#8B9BB4] hover:text-[#F0EBF5] border border-[#1E2A3A] hover:border-[#E8395A]/30'
                 }`}
               >
                 {filter}
@@ -48,91 +48,92 @@ export const ProjectsSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Responsive Project Cards Grid */}
+        {/* Project Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {filteredProjects.map((project) => (
+          {filteredProjects.map((project, idx) => (
             <div
               key={project.id}
-              className="rounded-2xl bg-[#121017] border border-[#231E2C] hover:border-[#E11D48]/50 transition-all duration-200 flex flex-col justify-between overflow-hidden shadow-sm group hover:-translate-y-1 hover:shadow-lg"
+              className="rounded-2xl bg-[#111827] border border-[#1E2A3A] hover:border-[#E8395A]/40 transition-all duration-300 flex flex-col overflow-hidden group hover:-translate-y-1 hover:shadow-[0_8px_40px_rgba(0,0,0,0.4)]"
             >
-              <div>
-                {/* Card Preview Window Header */}
-                <div className="px-5 py-3.5 bg-[#17131E] border-b border-[#231E2C] flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#EF4444]/70 inline-block" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#F59E0B]/70 inline-block" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#10B981]/70 inline-block" />
-                    <span className="ml-2 text-xs font-mono text-[#8E8798]">
-                      {project.language}
-                    </span>
-                  </div>
-                  <span className="text-[11px] font-mono font-medium px-2.5 py-0.5 rounded-md bg-[#20192A] text-[#FB7185] border border-[#30263B]">
-                    {project.category}
+              {/* Card Header — code window style */}
+              <div className="px-5 py-3.5 bg-[#0B0F19] border-b border-[#1E2A3A] flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#EF4444]/60" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#F59E0B]/60" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#10B981]/60" />
+                  <span className="ml-2 text-xs font-mono text-[#4A5568]">{project.language}</span>
+                </div>
+                <span className="text-[11px] font-mono font-semibold px-2.5 py-0.5 rounded-md bg-[#1A2035] text-[#FF6B8A] border border-[#E8395A]/20">
+                  {project.category}
+                </span>
+              </div>
+
+              {/* Code Preview */}
+              <div className="px-5 py-4 bg-[#0D1220] border-b border-[#1E2A3A] font-mono overflow-x-auto">
+                <div className="flex items-center justify-between text-[11px] text-[#4A5568] mb-2">
+                  <span className="flex items-center gap-1.5">
+                    <Terminal className="w-3.5 h-3.5 text-[#E8395A]" />
+                    {project.codeSnippet.filename}
                   </span>
+                  <span className="text-[#FF6B8A]">{project.version}</span>
                 </div>
+                <pre className="text-[11px] text-[#8B9BB4] leading-relaxed line-clamp-3 overflow-hidden select-none">
+                  <code>{project.codeSnippet.code}</code>
+                </pre>
+              </div>
 
-                {/* Card Code/Architecture Preview Banner */}
-                <div className="px-5 py-4 bg-[#0F0D14] border-b border-[#201B28] font-mono text-xs text-[#9E97A6] overflow-x-auto">
-                  <div className="flex items-center justify-between text-[11px] text-[#6E6778] mb-1.5">
-                    <span className="flex items-center gap-1.5">
-                      <Terminal className="w-3.5 h-3.5 text-[#E11D48]" />
-                      {project.codeSnippet.filename}
-                    </span>
-                    <span>{project.version}</span>
-                  </div>
-                  <pre className="text-[12px] text-[#D4CEDB] leading-relaxed line-clamp-3 overflow-hidden select-none opacity-85">
-                    <code>{project.codeSnippet.code}</code>
-                  </pre>
-                </div>
-
-                {/* Content Body */}
-                <div className="p-6 space-y-4">
-                  <div>
-                    <h3 className="text-xl font-bold text-white group-hover:text-[#FB7185] transition-colors">
+              {/* Body */}
+              <div className="p-6 space-y-4 flex-1">
+                <div>
+                  <div className="flex items-start justify-between gap-2">
+                    <h3 className="text-xl font-black text-[#F0EBF5] group-hover:text-[#FF6B8A] transition-colors tracking-tight">
                       {project.title}
                     </h3>
-                    <p className="text-xs font-mono text-[#E11D48] mt-1 font-medium">
-                      {project.tagline}
-                    </p>
+                    <span className="text-2xl font-black text-[#1E2A3A] font-mono shrink-0">
+                      {project.projectNumber}
+                    </span>
                   </div>
-
-                  <p className="text-sm text-[#C5BFCB] leading-relaxed">
-                    {project.description}
+                  <p className="text-xs font-mono text-[#E8395A] mt-1 font-semibold leading-relaxed">
+                    {project.tagline}
                   </p>
+                </div>
 
-                  {/* Architecture Details / Problem Solved */}
-                  <div className="space-y-1.5 pt-2 border-t border-[#201B28]">
-                    {project.architectureDetails.slice(0, 2).map((detail, idx) => (
-                      <div key={idx} className="flex items-start gap-2 text-xs text-[#9E97A6]">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#10B981] shrink-0 mt-0.5" />
-                        <span>{detail}</span>
-                      </div>
-                    ))}
-                  </div>
+                <p className="text-sm text-[#8B9BB4] leading-relaxed">
+                  {project.description}
+                </p>
 
-                  {/* Tech Stack Tags */}
-                  <div className="flex flex-wrap gap-1.5 pt-2">
-                    {project.stack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-[#191522] border border-[#2B2336] text-[#D4CEDB]"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                {/* Architecture highlights */}
+                <div className="space-y-1.5 pt-2 border-t border-[#1E2A3A]">
+                  {project.architectureDetails.slice(0, 2).map((detail, i) => (
+                    <div key={i} className="flex items-start gap-2 text-xs text-[#4A5568]">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#10B981] shrink-0 mt-0.5" />
+                      <span>{detail}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Stack tags */}
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {project.stack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-[#0B0F19] border border-[#1E2A3A] text-[#8B9BB4]"
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
               </div>
 
-              {/* Action Buttons Footer */}
-              <div className="px-6 py-4 bg-[#15121B] border-t border-[#201B28] flex items-center justify-between gap-3">
+              {/* Footer Actions */}
+              <div className="px-6 py-4 bg-[#0B0F19] border-t border-[#1E2A3A] flex items-center justify-between gap-3">
                 <a
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#1B1624] border border-[#2C2438] hover:border-[#E11D48]/50 text-xs font-mono text-white hover:text-[#FB7185] transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#111827] border border-[#1E2A3A] hover:border-[#E8395A]/40 text-xs font-mono text-[#8B9BB4] hover:text-[#FF6B8A] transition-all"
                 >
-                  <Github className="w-3.5 h-3.5 text-[#FB7185]" />
+                  <Github className="w-3.5 h-3.5" />
                   <span>View Code</span>
                 </a>
 
@@ -140,16 +141,15 @@ export const ProjectsSection: React.FC = () => {
                   href={project.docsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#E11D48]/15 border border-[#E11D48]/30 hover:bg-[#E11D48] text-xs font-mono text-[#FB7185] hover:text-white transition-all duration-200"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#E8395A]/10 border border-[#E8395A]/25 hover:bg-[#E8395A] text-xs font-mono text-[#FF6B8A] hover:text-white transition-all duration-200"
                 >
-                  <span>Live Demo / Docs</span>
+                  <span>Live Demo</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               </div>
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );
