@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-display: 'Bebas Neue', 'Oswald', sans-serif;
+    --font-script: 'Caveat', cursive, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    
+    --color-canvas: #09080A;
+    --color-surface-1: #100E13;
+    --color-surface-2: #16131A;
+    --color-surface-3: #201A24;
+    --color-border: #2B2230;
+    --color-border-hover: #5A1E29;
+    --color-primary: #E11D48;
+    --color-primary-hover: #F43F5E;
+    --color-secondary: #FB7185;
+    --color-tertiary: #FDA4AF;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #09080A;
+    color: #EDE8F0;
+  }
+  
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: 0.04em;
+  }
+
+  .font-script {
+    font-family: var(--font-script);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #09080A;
+}
+::-webkit-scrollbar-thumb {
+  background: #2B2230;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E11D48;
+}
+
+/* Atmospheric Glow & Grid Backgrounds */
+.bg-grid-pattern {
+  background-size: 36px 36px;
+  background-image: 
+    linear-gradient(to right, rgba(43, 34, 48, 0.3) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(43, 34, 48, 0.3) 1px, transparent 1px);
+}
+
+.bg-dot-pattern {
+  background-size: 28px 28px;
+  background-image: radial-gradient(circle, rgba(225, 29, 72, 0.18) 1px, transparent 1px);
+}
+
+.crimson-glow-radial {
+  background: radial-gradient(circle at 50% 0%, rgba(225, 29, 72, 0.22) 0%, rgba(9, 8, 10, 0) 70%);
+}
+
+.crimson-box-glow {
+  box-shadow: 0 4px 20px -2px rgba(9, 8, 10, 0.9), 0 0 1px 0 rgba(225, 29, 72, 0.25);
+}
+
+.crimson-box-glow-hover:hover {
+  box-shadow: 0 12px 36px -4px rgba(9, 8, 10, 0.95), 0 0 28px -2px rgba(225, 29, 72, 0.35);
+  border-color: #E11D48;
+  transform: translateY(-2px);
+}
+
+/* Big Display Portfolio Wordmark */
+.hero-watermark {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.05em;
+  line-height: 0.85;
+  user-select: none;
+  background: linear-gradient(180deg, rgba(225, 29, 72, 0.85) 0%, rgba(153, 27, 27, 0.3) 65%, rgba(9, 8, 10, 0) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Animations */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(1000%); }
+}
+
+.scanline-effect {
+  animation: scanline 8s linear infinite;
+}
